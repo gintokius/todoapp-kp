@@ -6,59 +6,48 @@ import {
   TOGGLE_ALL,
   TaskActionTypes,
   TasksState,
-} from './types'
+} from "./types";
 
-const initialState: TasksState = []
+const initialState: TasksState = [];
 
-function* idGenerator() {
-  let index = 0
-  while (true) {
-    yield index++
+let id = 0;
+
+const getValidId = (highestIndex: number): number => {
+  if (highestIndex !== id) {
+    id = highestIndex + 1;
   }
-}
+  return id++;
+};
 
-const idGen = idGenerator()
-
-let currentSwitch = false
-
-const rewindIdGenerator = (length: number, generatorValue: number): number => {
-  if (length === generatorValue) {
-    return generatorValue
-  } else {
-    let nextVal: number = generatorValue
-    while (nextVal < length) {
-      nextVal = idGen.next().value as number
-    }
-    return nextVal
-  }
-}
-
-export const tasksReducer = (state = initialState, action: TaskActionTypes): TasksState => {
+const tasksReducer = (state = initialState, action: TaskActionTypes): TasksState => {
   switch (action.type) {
     case ADD_TASK: {
-      const id = rewindIdGenerator(state.length, idGen.next().value as number)
       return state.concat({
         ...action.task,
-        id,
-      })
+        id: getValidId(
+          state.reduceRight((memo, task): number => task.id as number > memo ? task.id as number : memo, 0),
+        ),
+      });
     }
     case REMOVE_TASK: {
-      return state.filter(task => task.id !== action.id)
+      return state.filter((task) => task.id !== action.id);
     }
     case TOGGLE_ACTIVE: {
-      return state.map(task => ({
+      return state.map((task) => ({
         ...task,
         isDone: task.id === action.id ? !task.isDone : task.isDone,
-      }))
+      }));
     }
     case REMOVE_ALL_COMPLETED_TASKS: {
-      return state.filter(task => !task.isDone)
+      return state.filter((task) => !task.isDone);
     }
     case TOGGLE_ALL: {
-      currentSwitch = !currentSwitch
-      return state.map(task => ({ ...task, isDone: currentSwitch }))
+      const containsActive = state.some((task) => !task.isDone);
+      return state.map((task) => ({ ...task, isDone: containsActive }));
     }
     default:
-      return state
+      return state;
   }
-}
+};
+
+export default tasksReducer;

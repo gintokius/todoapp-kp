@@ -1,6 +1,6 @@
-import { Task } from '../../entities/Task'
-import { TaskActionTypes } from '../../store/tasks/types'
+import { Task } from "../../entities/Task";
+import { TaskActionTypes } from "../../store/tasks/types";
 
 export interface ITextInputProps {
-  addTask(task: Task): TaskActionTypes
+  addTask(task: Task): TaskActionTypes;
 }

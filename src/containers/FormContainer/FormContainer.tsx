@@ -1,35 +1,51 @@
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router'
-import { Routes } from '../../components/Routes'
-import { TaskList } from '../../components/TaskList'
-import { TextInput } from '../../components/TextInput'
-import './FormContainer.styles.scss'
-import { IFormContainerStateProps } from './FormContainer.types'
+import React, { Component } from "react";
+
+import { IFormContainerStateProps } from "./FormContainer.types";
+import { SHOW_ACTIVE, SHOW_DONE } from "../../store/filter/types";
+import {Task} from "../../entities/Task";
+
+import Tabs from "../../components/Tabs";
+import TextInput from "../../components/TextInput";
+import TaskList from "../../components/TaskList/TaskList";
+
+import "./FormContainer.styles.scss";
 
 export class FormContainer extends Component<IFormContainerStateProps> {
-  public handleRemoveAllTasksClick = () => {
-    const { removeAllCompletedTasks } = this.props
-    removeAllCompletedTasks()
+  handleRemoveAllTasksClick = () => {
+    const { removeAllCompletedTasks } = this.props;
+    removeAllCompletedTasks();
   }
 
-  public handleToggleAllTasksClick = () => {
-    const { toggleAllTasks } = this.props
-    toggleAllTasks()
+  handleToggleAllTasksClick = () => {
+    const { toggleAllTasks } = this.props;
+    toggleAllTasks();
   }
 
-  public render() {
-    const { tasks, activeTasks, completedTasks } = this.props
+  showFilteredTasks = (): Task[] => {
+    const { filter, tasks, activeTasks, completedTasks } = this.props;
+    switch (filter) {
+      case SHOW_ACTIVE:
+        return activeTasks;
+      case SHOW_DONE:
+        return completedTasks;
+      default:
+        return tasks;
+    }
+  }
+
+    render() {
+    const { tasks, completedTasks, activeTasks } = this.props;
     return (
-      <div className={'form-container'}>
+      <div className="form-container">
         <TextInput />
-        <div className={'form-container__control'}>
-          <Routes />
+        <div className="form-container__control">
+          <Tabs />
           {tasks.length ? (
             <button
               className="form-container__control-button"
               onClick={this.handleToggleAllTasksClick}
             >
-              Toggle all
+              Toggle all {`${activeTasks.length ? "completed" : "active"}`}
             </button>
           ) : null}
           {completedTasks.length ? (
@@ -41,17 +57,8 @@ export class FormContainer extends Component<IFormContainerStateProps> {
             </button>
           ) : null}
         </div>
-        <label />
-        <Switch>
-          <Route exact={true} path="/active">
-            {tasks.length ? <TaskList tasks={activeTasks} /> : null}
-          </Route>
-          <Route exact={true} path="/done">
-            {tasks.length ? <TaskList tasks={completedTasks} /> : null}
-          </Route>
-          <Route path="/">{tasks.length ? <TaskList tasks={tasks} /> : null}</Route>
-        </Switch>
+        {tasks.length ? <TaskList tasks={this.showFilteredTasks()}/> : null}
       </div>
-    )
+    );
   }
 }
