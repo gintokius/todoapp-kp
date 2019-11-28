@@ -13,7 +13,6 @@ const initialState: TasksState = [];
 let id = 0;
 
 const getValidId = (highestIndex: number, length: number): number => {
-  debugger;
   if (highestIndex !== id || length) {
     id = highestIndex + 1;
   }
