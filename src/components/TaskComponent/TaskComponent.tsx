@@ -24,7 +24,9 @@ export const TaskComponent: React.FC<ITaskComponentProps> = ({
     }
   };
 
-  useEffect(() => setChecked(task.isDone), [task.isDone]);
+  useEffect(() => {
+    setChecked(task.isDone);
+  }, [task.isDone]);
 
   return (
     <li>
@@ -32,7 +34,7 @@ export const TaskComponent: React.FC<ITaskComponentProps> = ({
         className={`task-list__task ${task.isDone ? "task-list__task_done" : ""}`}
         onClick={handleTaskClick}
       >
-        <input type="checkbox" defaultChecked={checked} />
+        <input type="checkbox" checked={checked} readOnly={true}/>
         <span>{task.text}</span>
         <span className="task-list__delete-sign" onClick={handleDeleteTaskClick}>
           ✕
