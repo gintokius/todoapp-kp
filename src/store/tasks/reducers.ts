@@ -12,8 +12,9 @@ const initialState: TasksState = [];
 
 let id = 0;
 
-const getValidId = (highestIndex: number): number => {
-  if (highestIndex !== id) {
+const getValidId = (highestIndex: number, length: number): number => {
+  debugger;
+  if (highestIndex !== id || length) {
     id = highestIndex + 1;
   }
   return id++;
@@ -26,6 +27,7 @@ const tasksReducer = (state = initialState, action: TaskActionTypes): TasksState
         ...action.task,
         id: getValidId(
           state.reduceRight((memo, task): number => task.id as number > memo ? task.id as number : memo, 0),
+          state.length,
         ),
       });
     }

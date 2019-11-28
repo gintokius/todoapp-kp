@@ -9,7 +9,8 @@ export const TaskComponent: React.FC<ITaskComponentProps> = ({
 }) => {
   const [checked, setChecked] = useState(task.isDone);
 
-  const handleTaskClick = () => {
+  const handleTaskClick = (e: SyntheticEvent) => {
+    e.stopPropagation();
     setChecked(!checked);
     if (task.id !== undefined) {
       toggleActive(task.id);
@@ -31,7 +32,7 @@ export const TaskComponent: React.FC<ITaskComponentProps> = ({
         className={`task-list__task ${task.isDone ? "task-list__task_done" : ""}`}
         onClick={handleTaskClick}
       >
-        <input type="checkbox" checked={checked} />
+        <input type="checkbox" defaultChecked={checked} />
         <span>{task.text}</span>
         <span className="task-list__delete-sign" onClick={handleDeleteTaskClick}>
           ✕
