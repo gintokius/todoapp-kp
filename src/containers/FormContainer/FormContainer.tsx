@@ -8,8 +8,8 @@ import { IFormContainerStateProps } from './FormContainer.types'
 
 export class FormContainer extends Component<IFormContainerStateProps> {
   public handleRemoveAllTasksClick = () => {
-    const { removeAllTasks } = this.props
-    removeAllTasks()
+    const { removeAllCompletedTasks } = this.props
+    removeAllCompletedTasks()
   }
 
   public handleToggleAllTasksClick = () => {

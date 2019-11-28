@@ -9,6 +9,9 @@
     ],
     "rules": {
       "prettier": true,
-      "interface-name": false
+      "interface-name": false,
+      "ordered-imports": false,
+      "member-ordering": false,
+      "object-literal-sort-keys": false
     }
   }
