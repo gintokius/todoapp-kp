@@ -10,7 +10,7 @@ import TaskList from "../../components/TaskList/TaskList";
 
 import "./FormContainer.styles.scss";
 
-export class FormContainer extends Component<IFormContainerStateProps> {
+export default class FormContainer extends Component<IFormContainerStateProps> {
   handleRemoveAllTasksClick = () => {
     const { removeAllCompletedTasks } = this.props;
     removeAllCompletedTasks();

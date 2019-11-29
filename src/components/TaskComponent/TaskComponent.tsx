@@ -2,7 +2,7 @@ import React, {SyntheticEvent, useState, useEffect } from "react";
 
 import { ITaskComponentProps } from "./TaskComponent.types";
 
-export const TaskComponent: React.FC<ITaskComponentProps> = ({
+const TaskComponent: React.FC<ITaskComponentProps> = ({
   task,
   toggleActive,
   removeTask,
@@ -43,3 +43,5 @@ export const TaskComponent: React.FC<ITaskComponentProps> = ({
     </li>
   );
 };
+
+export default TaskComponent;

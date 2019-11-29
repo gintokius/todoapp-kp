@@ -1,7 +1,7 @@
-import { TextInput } from "./TextInput";
-
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
+
+import TextInput from "./TextInput";
 
 import { addTask } from "../../store/tasks/actions";
 

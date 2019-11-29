@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 
-import { FormContainer } from "./FormContainer";
+import FormContainer from "./FormContainer";
 import { removeAllCompletedTasks, toggleAllTasks } from "../../store/tasks/actions";
 import { RootState } from "../../store";
 import { getActiveTasks, getCompletedTasks, getTasks } from "../../store/tasks/selectors";

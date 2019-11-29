@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { ITabsProps } from "./Tabs.types";
 
-export const Tabs: React.FC<ITabsProps> = ({ pathname, activeTasks }) => {
+const Tabs: React.FC<ITabsProps> = ({ pathname, activeTasks }) => {
   const activeClass = "form-container__route-nav_active";
 
   return (
@@ -26,3 +26,5 @@ export const Tabs: React.FC<ITabsProps> = ({ pathname, activeTasks }) => {
     </div>
   );
 };
+
+export default Tabs;

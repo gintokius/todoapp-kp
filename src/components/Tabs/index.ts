@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import { RootState } from "../../store";
-import { Tabs } from "./Tabs";
+import Tabs from "./Tabs";
 import { getActiveTasks } from "../../store/tasks/selectors";
 
 const mapStateToProps = (state: RootState) => ({

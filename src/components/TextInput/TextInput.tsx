@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 
 import { ITextInputProps } from "./TextInput.types";
 
-export const TextInput: React.FC<ITextInputProps> = ({ addTask }) => {
+const TextInput: React.FC<ITextInputProps> = ({ addTask }) => {
   const [text, setText] = useState<string>("");
 
   const handleTextChange = (e: FormEvent<HTMLInputElement>): void => {
@@ -38,3 +38,5 @@ export const TextInput: React.FC<ITextInputProps> = ({ addTask }) => {
     </React.Fragment>
   );
 };
+
+export default TextInput;
