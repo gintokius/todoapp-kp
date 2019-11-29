@@ -31,7 +31,7 @@ const TextInput: React.FC<ITextInputProps> = ({ addTask }) => {
           value={text}
           onChange={handleTextChange}
         />
-        <button type="submit" className={"form-container__button"} onClick={handleButtonClick}>
+        <button type="submit" className="form-container__button" onClick={handleButtonClick}>
           +
         </button>
       </form>

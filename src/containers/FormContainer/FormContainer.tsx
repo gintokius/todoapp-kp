@@ -40,22 +40,24 @@ export default class FormContainer extends Component<IFormContainerStateProps> {
         <TextInput />
         <div className="form-container__control">
           <Tabs />
-          {tasks.length ? (
-            <button
-              className="form-container__control-button"
-              onClick={this.handleToggleAllTasksClick}
-            >
-              Toggle all {`${activeTasks.length ? "completed" : "active"}`}
-            </button>
-          ) : null}
-          {completedTasks.length ? (
-            <button
-              className="form-container__control-button"
-              onClick={this.handleRemoveAllTasksClick}
-            >
-              Delete completed
-            </button>
-          ) : null}
+          <div>
+            {tasks.length ? (
+              <button
+                className="form-container__control-button"
+                onClick={this.handleToggleAllTasksClick}
+              >
+                Toggle all {`${activeTasks.length ? "completed" : "active"}`}
+              </button>
+            ) : null}
+            {completedTasks.length ? (
+              <button
+                className="form-container__control-button"
+                onClick={this.handleRemoveAllTasksClick}
+              >
+                Delete completed
+              </button>
+            ) : null}
+          </div>
         </div>
         {tasks.length ? <TaskList tasks={this.showFilteredTasks()}/> : null}
       </div>

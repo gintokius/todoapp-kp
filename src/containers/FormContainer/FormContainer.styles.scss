@@ -1,36 +1,41 @@
 .form-container {
   width: 70%;
+  display: flex;
+  flex-direction: column;
   margin: auto {
     top: 10vh;
+    bottom: 10vh;
   }
   padding: 1rem;
   background: #FFF;
   border-radius: 1px 10px 10px 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  > div {
-    display: inline-block;
+  form {
+    display: flex;
+    align-items: stretch;
+    flex: {
+      grow: 1;
+    }
+    justify-content: space-between;
   }
 
   &__text-input {
-    width: 78%;
     padding: 0.5rem {
       right: 0;
     }
+    width: 100%;
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid rgba(0,0,0,0.3);
   }
 
   &__button {
-    position: relative;
-    float: right;
-    margin-left: -100%;
     height: 44px;
-    width: 20%;
     background: #162952;
     border-radius: 5px;
     color: #FFFFFF;
     font-size: 24px;
+    width: 100px
   }
 
   &__route-nav {
@@ -38,6 +43,7 @@
     font-size: 14px;
     padding-left: 0;
     border-radius: 5px;
+    flex-wrap: nowrap;
 
     a {
       color: #fff;
@@ -56,7 +62,7 @@
       }
 
       li {
-        width: 5em;
+        height: inherit;
         text-align: center;
         padding: 10px;
         margin-right: 1px;
@@ -73,17 +79,21 @@
 
   &__control {
     width: 100%;
-    > div {
-      display: inline-block
-    };
+    display: flex;
+    flex: {
+      wrap: wrap;
+      shrink: 1;
+    } 
+    justify-content: space-between;
+    
   }
 
   &__control-button{
-    position: relative;
-    float: right;
+    align-self: flex-end;
     margin: {
-      top: 14px;
-      left: 2px;
+      top: 1em;
+      bottom: 1em;
+      left: auto;
     }
     font-size: 14px;
     padding: 10px;
@@ -91,5 +101,9 @@
     background: #162952;
     color: #FFFFFF;
     border-radius: 5px;
+    &:last-child {
+      margin-left: 2px;
+    }
+
   }
 }
