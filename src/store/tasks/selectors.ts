@@ -1,7 +1,33 @@
 import { RootState } from "../";
+import {SHOW_ACTIVE, SHOW_DONE} from "../filter/types";
+import {Task} from "../../entities/Task";
 
-export const getTasks = (state: RootState) => state.tasks;
+export const getFilteredTasks = (state: RootState): Task[] => {
+  return state.tasks.filter((task)=> {
+    switch (state.filter) {
+      case SHOW_ACTIVE:
+        return !task.isDone;
+      case SHOW_DONE:
+        return task.isDone;
+      default:
+        return true;
+    }
+  });
+};
 
-export const getActiveTasks = (state: RootState) => state.tasks.filter((task) => !task.isDone);
+export const getTasksByFilter = (state: RootState) => {
+  return (filter: string) => {
+    return state.tasks.filter((task)=> {
+      switch (filter) {
+        case SHOW_ACTIVE:
+          return !task.isDone;
+        case SHOW_DONE:
+          return task.isDone;
+        default:
+          return true;
+      }
+    });
+  };
+};
 
-export const getCompletedTasks = (state: RootState) => state.tasks.filter((task) => task.isDone);
+export const getActiveTasks = (state: RootState): Task[] => state.tasks.filter((task) => !task.isDone);

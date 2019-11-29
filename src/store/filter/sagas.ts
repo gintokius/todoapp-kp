@@ -1,4 +1,4 @@
-import { put, take, fork, select } from "redux-saga/effects";
+import { put, take, select } from "redux-saga/effects";
 
 import { RootState } from "../index";
 import { showAll, showActive, showDone } from "./actions";
@@ -22,6 +22,6 @@ function* watchLocationUpdate() {
   }
 }
 
-const filterSagas = [fork(watchLocationUpdate)];
-
-export default filterSagas;
+export default [
+  watchLocationUpdate(),
+];

@@ -2,11 +2,10 @@ import React, { Component } from "react";
 
 import { IFormContainerStateProps } from "./FormContainer.types";
 import { SHOW_ACTIVE, SHOW_DONE } from "../../store/filter/types";
-import {Task} from "../../entities/Task";
 
 import Tabs from "../../components/Tabs";
-import TextInput from "../../components/TextInput";
-import TaskList from "../../components/TaskList/TaskList";
+import TextInput from "../TextInput";
+import TaskList from "../TaskList";
 
 import "./FormContainer.styles.scss";
 
@@ -21,20 +20,8 @@ export default class FormContainer extends Component<IFormContainerStateProps> {
     toggleAllTasks();
   }
 
-  showFilteredTasks = (): Task[] => {
-    const { filter, tasks, activeTasks, completedTasks } = this.props;
-    switch (filter) {
-      case SHOW_ACTIVE:
-        return activeTasks;
-      case SHOW_DONE:
-        return completedTasks;
-      default:
-        return tasks;
-    }
-  }
-
-    render() {
-    const { tasks, completedTasks, activeTasks } = this.props;
+  render() {
+    const { tasks, getTasksByFilter } = this.props;
     return (
       <div className="form-container">
         <TextInput />
@@ -46,10 +33,10 @@ export default class FormContainer extends Component<IFormContainerStateProps> {
                 className="form-container__control-button"
                 onClick={this.handleToggleAllTasksClick}
               >
-                Toggle all {`${activeTasks.length ? "completed" : "active"}`}
+                Toggle all {`${getTasksByFilter(SHOW_ACTIVE).length ? "completed" : "active"}`}
               </button>
             ) : null}
-            {completedTasks.length ? (
+            {getTasksByFilter(SHOW_DONE).length ? (
               <button
                 className="form-container__control-button"
                 onClick={this.handleRemoveAllTasksClick}
@@ -59,7 +46,7 @@ export default class FormContainer extends Component<IFormContainerStateProps> {
             ) : null}
           </div>
         </div>
-        {tasks.length ? <TaskList tasks={this.showFilteredTasks()}/> : null}
+        {tasks.length ? <TaskList tasks={tasks}/> : null}
       </div>
     );
   }

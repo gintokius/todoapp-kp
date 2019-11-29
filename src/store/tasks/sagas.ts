@@ -1,15 +1,13 @@
-import { select, take, fork } from "redux-saga/effects";
-
-import { getTasks } from "./selectors";
+import { select, take } from "redux-saga/effects";
 
 function* watchTaskUpdate() {
   while (true) {
     yield take("*");
-    const tasks = yield select(getTasks);
+    const tasks = yield select((state) => state.tasks);
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 }
 
-const taskSagas = [fork(watchTaskUpdate)];
-
-export default taskSagas;
+export default [
+  watchTaskUpdate(),
+];

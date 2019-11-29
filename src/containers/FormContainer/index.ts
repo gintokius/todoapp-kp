@@ -4,14 +4,13 @@ import { bindActionCreators, Dispatch } from "redux";
 import FormContainer from "./FormContainer";
 import { removeAllCompletedTasks, toggleAllTasks } from "../../store/tasks/actions";
 import { RootState } from "../../store";
-import { getActiveTasks, getCompletedTasks, getTasks } from "../../store/tasks/selectors";
+import { getFilteredTasks, getTasksByFilter } from "../../store/tasks/selectors";
 import { getFilter } from "../../store/filter/selectors";
 
 const mapStateToProps = (state: RootState) => ({
-  tasks: getTasks(state),
-  activeTasks: getActiveTasks(state),
-  completedTasks: getCompletedTasks(state),
+  tasks: getFilteredTasks(state),
   filter: getFilter(state),
+  getTasksByFilter: getTasksByFilter(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
