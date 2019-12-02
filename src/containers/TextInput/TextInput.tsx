@@ -1,8 +1,9 @@
 import React, { FormEvent, useState } from "react";
 
 import { ITextInputProps } from "./TextInput.types";
+import {getValidId} from "../../utils";
 
-const TextInput: React.FC<ITextInputProps> = ({ addTask }) => {
+const TextInput: React.FC<ITextInputProps> = ({ addTask, tasks }) => {
   const [text, setText] = useState<string>("");
 
   const handleTextChange = (e: FormEvent<HTMLInputElement>): void => {
@@ -13,6 +14,7 @@ const TextInput: React.FC<ITextInputProps> = ({ addTask }) => {
     e.preventDefault();
     if (text) {
       addTask({
+        id: getValidId(tasks),
         isDone: false,
         text,
       });

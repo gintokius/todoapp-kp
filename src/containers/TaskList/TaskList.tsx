@@ -10,16 +10,12 @@ const TaskList: React.FC<ITaskListProps> = ({ tasks, removeTask, toggleActive })
 
   const handleTaskClick = (e: SyntheticEvent, task: Task) => {
     e.stopPropagation();
-    if (task.id !== undefined) {
-      toggleActive(task.id);
-    }
+    toggleActive(task.id);
   };
 
   const handleDeleteTaskClick = (e: SyntheticEvent, task: Task) => {
     e.stopPropagation();
-    if (task.id !== undefined) {
-      removeTask(task.id);
-    }
+    removeTask(task.id);
   };
 
   return (

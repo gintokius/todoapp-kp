@@ -10,24 +10,11 @@ import {
 
 const initialState: TasksState = [];
 
-let id = 0;
-
-const getValidId = (highestIndex: number, length: number): number => {
-  if (highestIndex !== id || length) {
-    id = highestIndex + 1;
-  }
-  return id++;
-};
-
 const tasksReducer = (state = initialState, action: TaskActionTypes): TasksState => {
   switch (action.type) {
     case ADD_TASK: {
       return state.concat({
         ...action.task,
-        id: getValidId(
-          state.reduceRight((memo, task): number => task.id as number > memo ? task.id as number : memo, 0),
-          state.length,
-        ),
       });
     }
     case REMOVE_TASK: {
