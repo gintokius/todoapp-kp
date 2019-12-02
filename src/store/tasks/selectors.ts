@@ -50,4 +50,7 @@ export const getTasksByFilter = createSelector(
   };
 });
 
-export const getActiveTasks = (state: RootState): Task[] => state.tasks.filter((task) => !task.isDone);
+export const getActiveTasks = createSelector(
+  getTasks,
+  (tasks: Task[]) => tasks.filter((task) => !task.isDone)
+);
