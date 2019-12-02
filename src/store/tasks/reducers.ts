@@ -1,5 +1,6 @@
 import {
   ADD_TASK,
+  CHANGE_PRIORITY,
   REMOVE_ALL_COMPLETED_TASKS,
   REMOVE_TASK,
   TOGGLE_ACTIVE,
@@ -32,6 +33,12 @@ const tasksReducer = (state = initialState, action: TaskActionTypes): TasksState
     case TOGGLE_ALL: {
       const containsActive = state.some((task) => !task.isDone);
       return state.map((task) => ({ ...task, isDone: containsActive }));
+    }
+    case CHANGE_PRIORITY: {
+      return state.map((task) => ({
+        ...task,
+        priority: task.id === action.id ? action.priority : task.priority,
+      }));
     }
     default:
       return state;

@@ -2,6 +2,7 @@ import React, { FormEvent, useState } from "react";
 
 import { ITextInputProps } from "./TextInput.types";
 import {getValidId} from "../../utils";
+import {Priority} from "../../entities/Task";
 
 const TextInput: React.FC<ITextInputProps> = ({ addTask, tasks }) => {
   const [text, setText] = useState<string>("");
@@ -17,6 +18,7 @@ const TextInput: React.FC<ITextInputProps> = ({ addTask, tasks }) => {
         id: getValidId(tasks),
         isDone: false,
         text,
+        priority: Priority.HIGH,
       });
     }
     setText("");

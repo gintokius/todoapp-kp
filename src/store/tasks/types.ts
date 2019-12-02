@@ -1,4 +1,4 @@
-import { Task } from "../../entities/Task";
+import {Priority, Task} from "../../entities/Task";
 
 export type TasksState = Task[];
 
@@ -7,6 +7,7 @@ export const REMOVE_TASK = "REMOVE_TASK";
 export const TOGGLE_ACTIVE = "TOGGLE_ACTIVE";
 export const REMOVE_ALL_COMPLETED_TASKS = "REMOVE_ALL_TASKS";
 export const TOGGLE_ALL = "TOGGLE_ALL";
+export const CHANGE_PRIORITY = "CHANGE_PRIORITY";
 
 interface IAddTaskAction {
   type: typeof ADD_TASK;
@@ -31,9 +32,16 @@ interface IToggleActiveAction {
   id: number;
 }
 
+interface IChangePriorityAction {
+  type: typeof CHANGE_PRIORITY;
+  id: number;
+  priority: Priority;
+}
+
 export type TaskActionTypes =
   | IAddTaskAction
   | IRemoveTaskAction
   | IToggleActiveAction
   | IRemoveAllCompletedTasksAction
-  | IToggleAllAction;
+  | IToggleAllAction
+  | IChangePriorityAction;

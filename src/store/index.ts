@@ -7,8 +7,9 @@ import { Task } from "../entities/Task";
 
 import tasksReducer from "./tasks/reducers";
 import taskSagas from "./tasks/sagas";
-import filterReducer from "./filter/reducers";
-import filterSagas from "./filter/sagas";
+import filterReducer from "./query/reducers";
+import filterSagas from "./query/sagas";
+import {QueryState} from "./query/types";
 
 export function* sagas() {
   yield all([...taskSagas, ...filterSagas]);
@@ -16,7 +17,7 @@ export function* sagas() {
 
 export const createRootReducer = (history: History) =>
   combineReducers({
-    filter: filterReducer,
+    query: filterReducer,
     router: connectRouter(history),
     tasks: tasksReducer,
   });
@@ -24,5 +25,5 @@ export const createRootReducer = (history: History) =>
 export interface RootState {
   router: RouterState;
   tasks: Task[];
-  filter: string;
+  query: QueryState;
 }

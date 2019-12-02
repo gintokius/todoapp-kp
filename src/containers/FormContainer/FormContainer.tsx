@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { IFormContainerStateProps } from "./FormContainer.types";
-import { SHOW_ACTIVE, SHOW_DONE } from "../../store/filter/types";
+import {SHOW_ACTIVE, SHOW_DONE, Sorting} from "../../store/query/types";
 
 import Tabs from "../../components/Tabs";
 import TextInput from "../TextInput";
@@ -10,6 +10,7 @@ import TaskList from "../TaskList";
 import "./FormContainer.styles.scss";
 
 export default class FormContainer extends Component<IFormContainerStateProps> {
+
   handleRemoveAllTasksClick = () => {
     const { removeAllCompletedTasks } = this.props;
     removeAllCompletedTasks();
@@ -20,8 +21,26 @@ export default class FormContainer extends Component<IFormContainerStateProps> {
     toggleAllTasks();
   }
 
+  handleChangeSortingClick = () => {
+    const { sorting, changeSorting } = this.props;
+    switch (sorting) {
+      case Sorting.PRIORITY_DESC: {
+        changeSorting(Sorting.PRIORITY_ASC);
+        break;
+      }
+      case Sorting.PRIORITY_ASC: {
+        changeSorting(Sorting.DEFAULT);
+        break;
+      }
+      default: {
+        changeSorting(Sorting.PRIORITY_DESC);
+        break;
+      }
+    }
+  }
+
   render() {
-    const { tasks, getTasksByFilter } = this.props;
+    const { tasks, getTasksByFilter, sorting } = this.props;
     return (
       <div className="form-container">
         <TextInput />
@@ -29,12 +48,25 @@ export default class FormContainer extends Component<IFormContainerStateProps> {
           <Tabs />
           <div>
             {tasks.length ? (
-              <button
-                className="form-container__control-button"
-                onClick={this.handleToggleAllTasksClick}
-              >
-                Toggle all {`${getTasksByFilter(SHOW_ACTIVE).length ? "completed" : "active"}`}
-              </button>
+              <React.Fragment>
+                <button
+                  className="form-container__control-button"
+                  onClick={this.handleChangeSortingClick}
+                >
+                  {
+                    sorting === Sorting.DEFAULT ?
+                    "Sort by priority (-)" :
+                    sorting === Sorting.PRIORITY_DESC ?
+                    "Sort by priority (+)" : "Default sorting"
+                  }
+                </button>
+                <button
+                  className="form-container__control-button"
+                  onClick={this.handleToggleAllTasksClick}
+                >
+                  Toggle all {`${getTasksByFilter(SHOW_ACTIVE).length ? "completed" : "active"}`}
+                </button>
+              </React.Fragment>
             ) : null}
             {getTasksByFilter(SHOW_DONE).length ? (
               <button

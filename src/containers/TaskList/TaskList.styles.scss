@@ -36,13 +36,44 @@
   }
 
   &__delete-sign {
-    position: relative;
-    float: right;
     color: #000 !important;
     opacity: 0.3;
     margin-right: 0 !important;
     &:hover {
       opacity: 1;
+    }
+  }
+
+}
+
+.priority {
+  display: flex;
+  * {
+    width: 28px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  &__sign{
+    &_high {
+      background: #146914;
+    }
+    &_normal {
+      background: #dada47;
+    }
+    &_low {
+      background: #cc3030;
+    }
+    &_inactive {
+      opacity: 0.3;
+      display: none;
+      &:hover{
+        opacity: 0.6;
+      }
+    }
+  }
+  &:hover {
+    * {
+      display: block;
     }
   }
 }

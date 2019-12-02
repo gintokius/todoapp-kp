@@ -5,6 +5,7 @@ import { createBrowserHistory } from "history";
 import { routerMiddleware } from "connected-react-router";
 import { RootState, createRootReducer, sagas } from "./store";
 import { Task } from "./entities/Task";
+import {SHOW_ALL, Sorting} from "./store/query/types";
 
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
@@ -25,6 +26,10 @@ export default function configureStore(): Store<RootState> {
   const store = createStore(
     createRootReducer(history),
     {
+      query: {
+        filter: SHOW_ALL,
+        sorting: Sorting.DEFAULT,
+      },
       tasks,
     },
     composeEnhancers(applyMiddleware(routerMiddleware(history), sagaMiddleware)),
