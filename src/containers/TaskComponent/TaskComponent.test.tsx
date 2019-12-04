@@ -2,11 +2,11 @@ import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
 
-import configureStore from "../configureStore";
-import TaskComponent from "../containers/TaskComponent/TaskComponent";
-import { ITaskComponentProps } from "../containers/TaskComponent/TaskComponent.types";
-import { mockstate } from "./mocks";
-import { Priority } from "../entities/Task";
+import configureStore from "../../configureStore";
+import TaskComponent from "./TaskComponent";
+import { ITaskComponentProps } from "./TaskComponent.types";
+import { mockstate } from "../../tests/mocks";
+import { Priority } from "../../entities/Task";
 
 const mockStore = configureStore();
 

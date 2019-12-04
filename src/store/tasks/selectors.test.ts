@@ -1,6 +1,6 @@
-import {getFilteredAndSortedTasks, getTasks, hasActiveTasks} from "../store/tasks/selectors";
-import { mockstate, filteredAndSortedTasksMock } from "./mocks";
-import { getFilter, getSorting } from "../store/query/selectors";
+import {getFilteredAndSortedTasks, getTasks, hasActiveTasks} from "./selectors";
+import { mockstate, filteredAndSortedTasksMock } from "../../tests/mocks";
+import { getFilter, getSorting } from "../query/selectors";
 
 describe("Task selectors", () => {
   it("returns all tasks correctly", () => {

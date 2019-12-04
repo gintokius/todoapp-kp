@@ -2,11 +2,11 @@ import React from "react";
 import { mount } from "enzyme";
 import { Provider } from "react-redux";
 
-import configureStore from "../configureStore";
-import { mockstate } from "./mocks";
-import TaskList from "../containers/TaskList/TaskList";
-import {ITaskListProps} from "../containers/TaskList/TaskList.types";
-import {getActiveTasks, getTasks} from "../store/tasks/selectors";
+import configureStore from "../../configureStore";
+import { mockstate } from "../../tests/mocks";
+import TaskList from "./TaskList";
+import {ITaskListProps} from "./TaskList.types";
+import {getActiveTasks, getTasks} from "../../store/tasks/selectors";
 
 const mockStore = configureStore();
 
