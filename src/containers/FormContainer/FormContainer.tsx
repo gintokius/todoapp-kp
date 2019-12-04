@@ -22,25 +22,12 @@ export default class FormContainer extends Component<IFormContainerStateProps> {
   }
 
   handleChangeSortingClick = () => {
-    const { sorting, changeSorting } = this.props;
-    switch (sorting) {
-      case Sorting.PRIORITY_DESC: {
-        changeSorting(Sorting.PRIORITY_ASC);
-        break;
-      }
-      case Sorting.PRIORITY_ASC: {
-        changeSorting(Sorting.DEFAULT);
-        break;
-      }
-      default: {
-        changeSorting(Sorting.PRIORITY_DESC);
-        break;
-      }
-    }
+    const { changeSorting } = this.props;
+    changeSorting();
   }
 
   render() {
-    const { tasks, getTasksByFilter, sorting } = this.props;
+    const { tasks, hasActiveTasks, sorting } = this.props;
     return (
       <div className="form-container">
         <TextInput />
@@ -64,11 +51,11 @@ export default class FormContainer extends Component<IFormContainerStateProps> {
                   className="form-container__control-button"
                   onClick={this.handleToggleAllTasksClick}
                 >
-                  Toggle all {`${getTasksByFilter(SHOW_ACTIVE).length ? "completed" : "active"}`}
+                  Toggle all {`${hasActiveTasks ? "completed" : "active"}`}
                 </button>
               </React.Fragment>
             ) : null}
-            {getTasksByFilter(SHOW_DONE).length ? (
+            {tasks.length && !hasActiveTasks ? (
               <button
                 className="form-container__control-button"
                 onClick={this.handleRemoveAllTasksClick}

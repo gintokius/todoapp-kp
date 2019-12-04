@@ -10,7 +10,17 @@ const filterReducer = (state = initialState, action: QueryActionTypes): QuerySta
     state = {...state, filter: action.type};
   }
   if (action.type === CHANGE_SORTING) {
-    state = {...state, sorting: action.sorting};
+    switch (state.sorting) {
+      case Sorting.PRIORITY_DESC: {
+        return {...state, sorting: Sorting.PRIORITY_ASC };
+      }
+      case Sorting.PRIORITY_ASC: {
+        return {...state, sorting: Sorting.DEFAULT };
+      }
+      default: {
+        return {...state, sorting: Sorting.PRIORITY_DESC };
+      }
+    }
   }
   return state;
 };

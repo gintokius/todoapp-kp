@@ -5,15 +5,14 @@ import TextInput from "./TextInput";
 
 import { addTask } from "../../store/tasks/actions";
 import {RootState} from "../../store";
-import {getTasksByFilter} from "../../store/tasks/selectors";
-import {SHOW_ALL} from "../../store/query/types";
+import {getTasks} from "../../store/tasks/selectors";
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return bindActionCreators({ addTask }, dispatch);
 };
 
 const mapStateToProps = (state: RootState) => ({
-  tasks: getTasksByFilter(state)(SHOW_ALL),
+  tasks: getTasks(state),
 });
 
 const Connected = connect(mapStateToProps, mapDispatchToProps)(TextInput);

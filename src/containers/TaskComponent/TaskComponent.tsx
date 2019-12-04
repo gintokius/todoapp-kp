@@ -34,21 +34,18 @@ const TaskComponent: React.FC<ITaskComponentProps> = ({
         <input type="checkbox" checked={task.isDone} readOnly={true}/>
         <span>{task.text}</span>
         <div className="priority">
-          <div
-            className={`priority__sign_high ${task.priority !== Priority.HIGH ? inactiveClass : ""}`}
-            data-value={Priority.HIGH}
-            onClick={priorityChange}
-          />
-          <div
-            className={`priority__sign_normal ${task.priority !== Priority.NORMAL ? inactiveClass : ""}`}
-            data-value={Priority.NORMAL}
-            onClick={priorityChange}
-          />
-          <div
-            className={`priority__sign_low ${task.priority !== Priority.LOW ? inactiveClass : ""}`}
-            data-value={Priority.LOW}
-            onClick={priorityChange}
-          />
+          {(["HIGH", "NORMAL", "LOW"]).map((attribute) => (
+            <div
+              className={
+                `priority__sign_${attribute.toLowerCase()}
+                ${task.priority !== Priority[attribute as keyof typeof Priority] ?
+                  inactiveClass : ""}`
+              }
+              data-value={Priority[attribute as keyof typeof Priority]}
+              onClick={priorityChange}
+              key={`task-priority-${task.id}-${Priority[attribute as keyof typeof Priority]}`}
+            />
+          ))}
         </div>
         <span className="task-list__delete-sign" onClick={deleteTask}>
           ✕

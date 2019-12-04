@@ -8,7 +8,7 @@ import {
   TOGGLE_ALL,
 } from "./types";
 
-export const addTask = (task: Task): TaskActionTypes => ({ type: ADD_TASK, task: { ...task } });
+export const addTask = (task: Task): TaskActionTypes => ({ type: ADD_TASK, task });
 export const removeTask = (id: number): TaskActionTypes => ({ type: REMOVE_TASK, id });
 export const toggleActive = (id: number): TaskActionTypes => ({ type: TOGGLE_ACTIVE, id });
 export const removeAllCompletedTasks = (): TaskActionTypes => ({ type: REMOVE_ALL_COMPLETED_TASKS });

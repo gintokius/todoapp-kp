@@ -28,7 +28,6 @@ interface IShowAllAction {
 
 interface IChangeSortingAction {
   type: typeof CHANGE_SORTING;
-  sorting: number;
 }
 
 export type QueryActionTypes = IShowActiveAction | IShowDoneAction | IShowAllAction | IChangeSortingAction;

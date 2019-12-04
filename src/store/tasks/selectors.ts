@@ -11,33 +11,8 @@ export const getFilteredAndSortedTasks = createSelector(
   getTasks,
   getFilter,
   getSorting,
-  (tasks, filter, sorting) => {
-  return sortBy(tasks.filter((task)=> {
-    switch (filter) {
-      case SHOW_ACTIVE:
-        return !task.isDone;
-      case SHOW_DONE:
-        return task.isDone;
-      default:
-        return true;
-    }
-  }), (task: Task) => {
-    switch(sorting) {
-      case Sorting.PRIORITY_DESC:
-        return task.priority;
-      case Sorting.PRIORITY_ASC:
-        return -task.priority;
-      default:
-        return task.id;
-    }
-  });
-});
-
-export const getTasksByFilter = createSelector(
-  getTasks,
-  (tasks) => {
-  return (filter: string) => {
-    return tasks.filter((task)=> {
+  (tasks, filter, sorting) =>
+    sortBy(tasks.filter((task)=> {
       switch (filter) {
         case SHOW_ACTIVE:
           return !task.isDone;
@@ -46,11 +21,24 @@ export const getTasksByFilter = createSelector(
         default:
           return true;
       }
-    });
-  };
-});
+    }), (task: Task) => {
+      switch(sorting) {
+        case Sorting.PRIORITY_DESC:
+          return task.priority;
+        case Sorting.PRIORITY_ASC:
+          return -task.priority;
+        default:
+          return null;
+      }
+    }),
+);
 
 export const getActiveTasks = createSelector(
   getTasks,
-  (tasks: Task[]) => tasks.filter((task) => !task.isDone)
+  (tasks: Task[]) => tasks.filter((task) => !task.isDone),
+);
+
+export const hasActiveTasks = createSelector(
+  getTasks,
+  (tasks: Task[]) => tasks.some((task) => !task.isDone),
 );
